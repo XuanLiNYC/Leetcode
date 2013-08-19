@@ -1,0 +1,63 @@
+public class Solution {
+    public boolean canJump(int[] A) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if((A.length == 0) || (A == null) ){
+            return(false);
+        }
+        
+        return(check(A, 0));
+    }
+    
+    public boolean check(int[] A, int start) {
+        if(A[start] >= A.length - start -1) {
+            return(true);
+        } else {
+            if(A[start] == 0) {
+                return(false);
+            } else {
+                for(int i =A[start] ; i >=1 ; i -- ) {
+                    if(check(A, start + i )){
+                        return(true);
+                    }
+                }
+                return(false);
+                
+            }
+        }
+        
+    }
+}
+
+
+
+public class Solution {
+    public boolean canJump(int[] A) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if((A.length == 0) || (A == null) ){
+            return(false);
+        }
+        
+        return(check(A, 0));
+    }
+    
+    public boolean check(int[] A, int start) {
+        if(A[start] >= A.length - start -1) {
+            return(true);
+        } else {
+            if(A[start] == 0) {
+                return(false);
+            } else {
+                for(int i =A[start] ; i >=1 ; i -- ) {
+                    if(check(A, start + i )){
+                        return(true);
+                    }
+                }
+                return(false);
+                
+            }
+        }
+        
+    }
+}

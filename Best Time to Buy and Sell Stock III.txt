@@ -1,0 +1,46 @@
+// 过不了大集合
+
+public class Solution {
+    public int maxProfit(int[] prices) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        int max = 0;
+        for(int i = 0; i<= prices.length-1 ; i ++) {
+            int temp = check(prices, 0, i) + check(prices, i+1,prices.length-1);
+            if( temp > max) {
+                max = temp;
+            }
+        }
+        
+        return(max);
+    }
+    
+    public int check(int[] prices, int start, int end) {
+        if(start == end) {
+            return(0);
+        }
+        if(start > end) {
+            return(0);            
+        }
+        
+        if(start >prices.length-1 || end > prices.length-1 ) {
+            return(0); 
+        }
+        
+        int max = 0;
+        int min = prices[start];
+        for(int i = start+1 ; i <= end ; i++) {
+            if(prices[i] > min ) {
+                int p = prices[i] - min ;
+                if(max < p) {
+                    max = p;
+                }
+            } else {
+               min =  prices[i];
+            }
+        }
+        
+        return(max);
+        
+    }
+}

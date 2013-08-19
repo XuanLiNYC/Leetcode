@@ -1,0 +1,71 @@
+public class Solution {
+    public int jump(int[] A) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if(A == null ){
+            return(0);
+        } else if(A.length <= 1){
+            return(0);
+        }
+        
+     
+        int N = A.length ;
+        int[] save = new int[N];
+        for(int i = 0 ; i < N; i ++) {
+            save[i]= -1;
+        }
+  
+        int result =  check(0, A, N-1, save);
+        return(result);
+     } 
+     
+     
+    
+    
+    public int check(int start, int[] A, int length, int[] save ) {
+        int N = A.length;
+         int result = -1;
+
+        if(A[start] >= length ) {   
+            save[start] = 1;
+            return(1);
+        } 
+         if(A[start] == 0) {
+             
+             return (result);
+         }
+         if(start >= N) {
+             return(-1);
+         }
+      
+            
+         if(save[start] == -1) {
+             
+             for(int i = 1 ; i <= A[start]; i ++) {
+              if(start + i < N) {
+                  int temp = -1;
+                
+                    temp = check(start+i, A, length - i, save ) ;
+  
+                 
+                    if(result < 0 ) {
+                         result = temp;
+                      } else if ((temp < result )&&(temp > 0)){
+                         result = temp;
+                      }
+
+              }
+                
+            }   
+            save[start] = result;
+             return(save[start]+1 );
+            
+         } else {
+             return(save[start]+1);
+         }
+
+      
+       
+
+    }
+}

@@ -1,0 +1,45 @@
+public class Solution {
+    public int minCut(String s) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        
+        if((s.length() <=1) || (s == null )){
+            return(0);
+        }
+        
+     if(palindrome(s)) {
+           return(0);
+      }
+       else {
+            
+          int result = -1;
+        for(int i=1; i < s.length(); i++) {
+            int temp = minCut(s.substring(0,i)) +1+ minCut(s.substring(i,s.length()));
+            if(result == -1) {
+                result = temp;
+            } else if( result > temp) {
+                result = temp;
+            }
+        }
+        return(result);
+            
+        }
+    }
+    
+   
+    public boolean palindrome(String s) {
+        if(s.length() <=1) {
+            return (true) ;
+        }
+        
+        for(int i = 0; i < s.length() /2 ; i++) {
+            if(s.charAt(i) == s.charAt(s.length()-1-i)) {
+                
+            } else {
+                return(false);
+            }
+        }
+        return(true);
+    }
+    
+}

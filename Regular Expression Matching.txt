@@ -1,0 +1,64 @@
+public class Solution {
+    public boolean isMatch(String s, String p) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        
+        boolean result = match(s,p,0,0);
+        
+        return(result);
+    }
+    
+    boolean match(String s, String p, int s0, int p0){
+        
+        while((s0 < s.length() )&& (p0 < p.length() )) {
+            if( s.charAt(s0) == p.charAt(p0)) {                 
+                 s0++;
+                 p0++; 
+            } else if (p.charAt(p0) == '.') {
+                
+                 s0++;
+                 p0++;  
+            } else if (p.charAt(p0) == '*') {
+                if(p0 == p.length()-1) {
+                    return (true) ;
+                }
+                
+                
+                int temps = s0;
+                int tempp = p0 +1 ;
+               while((temps < s.length()) && (tempp < s.length ()) ) {
+    
+                   if(s.charAt(temps) == p.charAt(tempp)) {
+                     if(match(s,p,temps+1, tempp+1)) {
+                         return (true);
+                     }
+                     temps++;
+                   } else if( (p.charAt(tempp) == '.') || (p.charAt(tempp) == '*') ) {
+                       tempp ++;                     
+                   } else {
+                       temps++;         
+                   }                   
+               }
+               
+                return (false) ;
+                    
+               
+            } else if ( s0 == 0) {
+                p0++;
+                
+            }  else {
+                return (false);
+            
+            } 
+        }
+        
+        
+        if((s0 == s.length()) && (p0 == p.length())) {
+            
+            return (true);
+        } else  {
+            
+            return(false);
+        }
+    }
+}

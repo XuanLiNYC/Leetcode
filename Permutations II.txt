@@ -1,0 +1,47 @@
+public class Solution {
+    public ArrayList<ArrayList<Integer>> permuteUnique(int[] num) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        ArrayList<ArrayList<Integer>> list = new ArrayList<ArrayList<Integer>>();
+        if((num == null)|| num.length == 0){
+            return(list);
+        }
+        Arrays.sort(num);
+        
+        permutation(num, 0, list);
+        return(list);
+        
+    }
+    
+    public void permutation(int[] num, int start,  ArrayList<ArrayList<Integer>> list) {
+        if(start == num.length -1) {
+        ArrayList<Integer> templist = new ArrayList<Integer>();
+        for(int i = 0 ; i < num.length; i ++) {
+            templist.add(num[i]);
+        }
+        if(!list.contains(templist)){
+                 list.add(templist);   
+        }
+
+        return;
+        } 
+       
+       for(int i = start; i < num.length; i ++) {
+            if(i == start)  {
+                permutation(num, start+1, list);
+            } else if(num[i] == num[start]){
+                
+            } else {
+                int[] newnum = new int[num.length];
+                for(int j = 0 ; j < num.length; j ++){
+                    newnum[j] = num[j];
+                }
+                int tempvalue =num[i];
+                newnum[i]= newnum[start];
+                newnum[start] = tempvalue;
+                permutation(newnum, start+1, list);
+            }
+        }
+        
+    }
+}

@@ -1,0 +1,57 @@
+public class Solution {
+    public int divide(int dividend, int divisor) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+    
+     
+     if(dividend == Integer.MAX_VALUE){
+         return(1);
+     }
+     
+     int tag = 1;
+     if (dividend < 0) {
+         tag *= -1;
+     }
+     if(divisor < 0) {
+         tag *= -1;
+     }
+     
+    dividend = Math.abs(dividend);
+    divisor = Math.abs(divisor);
+    if(dividend < divisor)
+    return(0);
+    int save = 1;
+    int step = 0 ;
+    int result = 0;
+    
+    while (dividend > divisor) {
+        if((Integer.MAX_VALUE>>1)>divisor ){
+        divisor <<= 1;
+        save <<= 1;
+        step ++; 
+        }
+ 
+    }
+    if(dividend < divisor) {
+        
+    divisor >>= 1;
+    save >>=1;
+    step -=1;
+     
+    }
+
+    while(step >= 0) {
+        if(dividend >= divisor) {
+             dividend = dividend - divisor ;  
+             result += save;         
+        }
+        save <<= 1;
+        divisor <<= 1;
+        step --;
+   
+    }
+    
+    return(result*tag);
+     
+    }
+}

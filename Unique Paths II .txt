@@ -1,0 +1,52 @@
+public class Solution {
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        int m = obstacleGrid.length;
+        int n= obstacleGrid[0].length;
+        
+        if(obstacleGrid[m-1][n-1] == 1){
+            return(0);
+        }
+        
+        int result = check(obstacleGrid, m, n) ;
+        return(result);
+    
+    }
+    
+    public int check(int[][] obstacleGrid, int m, int n) {
+        
+        int row = obstacleGrid.length;
+        int column = obstacleGrid[0].length;
+        int i = m ;
+        int j = n ;
+        
+         if( m == 1) {
+             for( j = n ; j>=1; j--) {
+                 if(obstacleGrid[m-1][j-1] == 1) {
+                     return(0);
+                 }
+             }
+             return(1);
+         }
+         
+         if( n == 1) {
+             for( i = m ; i>=1; i--) {
+                 if(obstacleGrid[i-1][n-1] == 1) {
+                     return(0);
+                 }
+             }
+             return(1);
+         }
+        
+        int result = 0;
+            if(obstacleGrid[m-1-1][n-1]!=1) {
+             result +=  check(obstacleGrid,m-1, n);  
+            }
+            if(obstacleGrid[m-1][n-1-1]!=1) {
+             result +=  check(obstacleGrid,m, n-1);  
+            }
+         return (result) ;
+   
+    }
+}

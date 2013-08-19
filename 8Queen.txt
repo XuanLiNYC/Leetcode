@@ -1,0 +1,72 @@
+public class Solution {
+    public int totalNQueens(int n) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+         if(n == 1){
+            return(1);
+        } else if(n<=0) {
+            return(0);
+        }
+        
+      int[] queen = new int[n];
+      for(int i = 0; i < n ; i++) {
+          queen[i] = i;
+      }
+      
+      int result = 0;
+      int[] record = new int[n];
+       check(queen, n, 0, record);
+       result = totalnum;
+      return (result);
+    }
+    
+     
+    public int totalnum = 0;
+    
+    public boolean check(int[] queen, int n, int start, int[] record) {  // start is the posoition that need to assign value
+       if(start == n){
+           totalnum ++;
+           return(true);
+       }
+        
+        for(int i = start ;i< n; i++) {
+           
+              int[] newrecord = new int[n];
+              int[] newqueen = new int[n];
+              
+              for(int m = 0; m< n; m++) {
+                  newrecord[m] = record[m];
+                  newqueen[m]=queen[m];
+              }
+              
+                newrecord[start]= newqueen[i];
+                if(checkValid(newrecord, start)){
+                    
+                    if(i != start) {
+                    int temp = newqueen[start];
+                    newqueen[start] = newqueen[i];
+                    newqueen[i] = temp; 
+                     }
+                    
+                    check(newqueen,n,start+1, newrecord );
+                }
+         
+        }
+        return(true);
+    }
+    
+     public boolean checkValid( int[] record,  int j) {
+        for(int m = 0 ; m < j ; m++) {
+            for(int n = m+1; n <=j; n++) {
+             
+             if (Math.abs(record[m] - record[n]) == (n-m) ) {
+                 return (false);
+             }
+            }
+            
+        }
+        return(true);
+        
+    }
+
+}

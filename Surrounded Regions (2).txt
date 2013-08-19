@@ -1,0 +1,85 @@
+public class Solution {
+    public void solve(char[][] board) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if(board.length == 0){
+            return;
+        }
+        
+        int r = board.length;
+        int c= board[0].length;
+       
+        
+        int[][] checked = new int[r][c];
+        int[][] notchange = new int[r][c];
+        
+        for(int i = 0 ; i < r; i++) {
+            if(board[i][0] == 'O') {
+                if(notchange[i][0] == 0){
+                     mark(board, notchange, i, 0);                    
+                } 
+            }
+            
+             if(board[i][c-1] == 'O') {
+                if(notchange[i][c-1] == 0){
+                     mark(board, notchange, i, c-1);                    
+                } 
+            }
+            
+        }
+        
+        
+        for(int j = 0 ; j < c ; j++) {
+            if(board[0][j] == 'O') {
+               if(notchange[0][j] == 0){
+                     mark(board, notchange, 0, j);                    
+                } 
+            }
+              if(board[r-1][j] == 'O') {
+               if(notchange[r-1][j] == 0){
+                     mark(board, notchange, r-1, j);                    
+                } 
+            }
+        }
+        
+        for(int i = 0 ; i < r; i++) {
+            for(int j = 0 ; j < c; j++) {
+                if(board[i][j] == 'O') {
+                    if(notchange[i][j] == 0) {
+                        board[i][j] = 'X';
+                    }
+                }
+                
+            }
+            
+        }
+    }
+    
+    public void mark(char [][] board, int[][] notchange, int i, int j) {
+        int r = board.length;
+        int c= board[0].length;
+        
+       if(i < 0 || i >= r) {
+           return;
+       }
+       if(j < 0 || j >= c) {
+           return;
+       }
+       
+       if(notchange[i][j] == 1) {
+           return;
+       } else {
+           
+         if( board[i][j] == 'O') {
+            notchange[i][j] = 1;
+            mark(board,notchange, i-1, j);
+            mark(board,notchange, i+1, j);
+            mark(board,notchange, i, j-1);
+            mark(board,notchange, i, j+1);             
+          }    
+          
+       }
+
+        
+    }
+}

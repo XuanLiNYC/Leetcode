@@ -1,0 +1,65 @@
+public class Solution {
+    public void solve(char[][] board) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if((board == null ) || (board.length == 0)){
+            return;
+        }
+ 
+        
+        int row = board.length;
+        int column =  board[0].length;
+
+        if((row <= 1) || (column <= 1) ) {
+            return;
+        }
+        
+        
+        int[][] mark =  new int[row][column] ;
+        
+        for(int i = 0; i < row; i++) {
+            
+                update(mark,board, i, 0);
+                update(mark,board, i, column-1);
+            
+        }
+        
+        for(int i = 0; i < column; i++) {
+           
+                update(mark, board,0, i);
+           
+                update(mark, board,row-1, i);
+            
+        }
+        
+        for(int i = 0; i < row; i ++) {
+            for(int j = 0; j< column ; j++){
+                
+                if((board[i][j] =='O') && (mark[i][j] == 0)){
+                    board[i][j]='X';
+                }
+            }
+        }
+        
+        
+    }
+  
+    public void update(int[][] mark, char[][] board, int i, int j ) {
+        int row = board.length;
+        int column =  board[0].length;
+        if((i< 0) || (i > row-1) ||(j <0) || (j> column -1)) {
+            return;
+        }
+        
+        if((board[i][j] == 'O') && ( mark[i][j] == 0)) {
+            mark[i][j] = 1;
+            update(mark, board, i-1, j);
+            update(mark, board, i+1, j);
+            update(mark, board, i, j-1);
+            update(mark, board, i, j+1);
+        }
+        
+ 
+    }
+    
+}

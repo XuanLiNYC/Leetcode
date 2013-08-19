@@ -1,0 +1,57 @@
+/**
+ * Definition for binary tree
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        int lengthp =  preorder.length ;
+        int lengthi = inorder.length ;
+        TreeNode head = rebuild(preorder, 0, lengthp-1, inorder, 0, lengthi-1);
+        
+    }
+    
+    public TreeNode rebuild(int[] preorder, int pstart, int pend, int[] inorder, int istart, int iend) {
+       
+       
+          TreeNode head = new TreeNode(preorder[pstart]);
+          if(pend == pstart ) {
+              return(head);
+          }
+          
+          int middle = findIndex(inorder,preorder[pstart]);
+          
+          int lpstart = pstart -1;
+          int rpstart = findIndex(preorder, inorder[middle+1]);
+          int lpend = rpstart-1;
+          int rpend = pend;
+        
+          int listart = istart;
+          int liend = middle-1;
+          int ristart= middle+1;
+          int riend = iend;
+          
+         
+         
+          
+          head.left = rebuild(preorder, lpstart, lpend, inorder, listart, liend);
+          head.right = rebuild(preorder, rpstart, rpend, inorder, ristart, riend);
+        return(head);
+    }
+    
+    public int findIndex(int[] array, int value) {
+        for(int it = 0; i < array.length; i ++) {
+            
+            if(array[i]==value) {
+                return(i);
+            }
+        }
+        return(-1);
+    }
+}
